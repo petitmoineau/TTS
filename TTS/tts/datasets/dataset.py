@@ -48,8 +48,10 @@ def get_audio_size(audiopath):
     extension = audiopath.rpartition(".")[-1].lower()
     if extension not in {"mp3", "wav", "flac"}:
         raise RuntimeError(f"The audio format {extension} is not supported, please convert the audio files to mp3, flac, or wav format!")
-
     audio_info = mutagen.File(audiopath).info
+    print(f"{audio_info}> audio info! ")
+    print(f"{audio_info.length}> audio info length! ")
+    print(f"{audio_info.sample_rate}> audio info! sample_rate!")
     return int(audio_info.length * audio_info.sample_rate)
 
 
