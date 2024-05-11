@@ -5,6 +5,7 @@ from TTS.tts.utils.text.phonemizers.espeak_wrapper import ESpeak
 from TTS.tts.utils.text.phonemizers.gruut_wrapper import Gruut
 from TTS.tts.utils.text.phonemizers.ko_kr_phonemizer import KO_KR_Phonemizer
 from TTS.tts.utils.text.phonemizers.zh_cn_phonemizer import ZH_CN_Phonemizer
+from TTS.tts.utils.text.phonemizers.uk_ua_phonemizer import UK_UA_Phonemizer
 
 try:
     from TTS.tts.utils.text.phonemizers.ja_jp_phonemizer import JA_JP_Phonemizer
@@ -12,7 +13,7 @@ except ImportError:
     JA_JP_Phonemizer = None
     pass
 
-PHONEMIZERS = {b.name(): b for b in (ESpeak, Gruut, KO_KR_Phonemizer, BN_Phonemizer)}
+PHONEMIZERS = {b.name(): b for b in (ESpeak, Gruut, KO_KR_Phonemizer, BN_Phonemizer, UK_UA_Phonemizer)}
 
 
 ESPEAK_LANGS = list(ESpeak.supported_languages().keys())
@@ -37,7 +38,7 @@ DEF_LANG_TO_PHONEMIZER["zh-cn"] = ZH_CN_Phonemizer.name()
 DEF_LANG_TO_PHONEMIZER["ko-kr"] = KO_KR_Phonemizer.name()
 DEF_LANG_TO_PHONEMIZER["bn"] = BN_Phonemizer.name()
 DEF_LANG_TO_PHONEMIZER["be"] = BEL_Phonemizer.name()
-
+DEF_LANG_TO_PHONEMIZER["uk-UA"] = UK_UA_Phonemizer.name()
 
 # JA phonemizer has deal breaking dependencies like MeCab for some systems.
 # So we only have it when we have it.
@@ -72,6 +73,8 @@ def get_phonemizer_by_name(name: str, **kwargs) -> BasePhonemizer:
         return BN_Phonemizer(**kwargs)
     if name == "be_phonemizer":
         return BEL_Phonemizer(**kwargs)
+    if name == "uk_ua_phonemizer":
+        return UK_UA_Phonemizer(**kwargs)
     raise ValueError(f"Phonemizer {name} not found")
 
 
