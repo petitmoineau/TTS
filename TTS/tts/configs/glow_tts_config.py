@@ -107,20 +107,20 @@ class GlowTTSConfig(BaseTTSConfig):
         default_factory=lambda: {
             "kernel_size": 3,
             "dropout_p": 0.1,
-            "num_layers": 6,
-            "num_heads": 2,
-            "hidden_channels_ffn": 768,
+            "num_layers": 8,
+            "num_heads": 4,
+            "hidden_channels_ffn": 1024,
         }
     )
     use_encoder_prenet: bool = True
-    hidden_channels_enc: int = 192
-    hidden_channels_dec: int = 192
+    hidden_channels_enc: int = 256
+    hidden_channels_dec: int = 256
     hidden_channels_dp: int = 256
     dropout_p_dp: float = 0.1
-    dropout_p_dec: float = 0.05
+    dropout_p_dec: float = 0.1
     mean_only: bool = True
     out_channels: int = 80
-    num_flow_blocks_dec: int = 12
+    num_flow_blocks_dec: int = 16
     inference_noise_scale: float = 0.33
     kernel_size_dec: int = 5
     dilation_rate: int = 1
@@ -128,16 +128,16 @@ class GlowTTSConfig(BaseTTSConfig):
     num_speakers: int = 0
     c_in_channels: int = 0
     num_splits: int = 4
-    num_squeeze: int = 2
+    num_squeeze: int = 1
     sigmoid_scale: bool = False
     encoder_type: str = "rel_pos_transformer"
     encoder_params: dict = field(
         default_factory=lambda: {
             "kernel_size": 3,
             "dropout_p": 0.1,
-            "num_layers": 6,
-            "num_heads": 2,
-            "hidden_channels_ffn": 768,
+            "num_layers": 8,
+            "num_heads": 4,
+            "hidden_channels_ffn": 1024,
             "input_length": None,
         }
     )
@@ -163,7 +163,7 @@ class GlowTTSConfig(BaseTTSConfig):
     lr_scheduler: str = "NoamLR"
     lr_scheduler_params: dict = field(default_factory=lambda: {"warmup_steps": 4000})
     grad_clip: float = 5.0
-    lr: float = 1e-3
+    lr: float = 1e-4
 
     # overrides
     min_seq_len: int = 3
@@ -173,10 +173,10 @@ class GlowTTSConfig(BaseTTSConfig):
     # testing
     test_sentences: List[str] = field(
         default_factory=lambda: [
-            "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            "Be a voice, not an echo.",
-            "I'm sorry Dave. I'm afraid I can't do that.",
-            "This cake is great. It's so delicious and moist.",
-            "Prior to November 22, 1963.",
-        ]
+        "слава іссу, панство дорогеє, я Євгешка, вашого синочка невістонька",
+        "доброго дня, ми з україни",
+        "є села, що з сірої зони стали зоною ведення бойових дій",
+        "фортифікаційні роботи були проведені в недостатній кількості",
+        "збираємо кракену на пікапи"
+    ]
     )
